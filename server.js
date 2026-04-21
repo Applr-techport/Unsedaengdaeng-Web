@@ -7,7 +7,16 @@ const PORT = process.env.PORT || 8080;
 // 정적 파일 서빙
 app.use(express.static(path.join(__dirname, 'public')));
 
-// SPA 라우팅 — 모든 경로를 index.html로
+// 정적 HTML 페이지 (.html 없이 접근 가능)
+app.get('/privacy', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'privacy.html'));
+});
+
+app.get('/terms', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'terms.html'));
+});
+
+// SPA 라우팅 — 나머지 경로를 index.html로
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
